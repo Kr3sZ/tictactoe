@@ -3,3 +3,19 @@ html, body
     overflow: hidden;
 }
 
+#game
+{
+    background-color: aqua;
+    margin: auto;
+}
+
+#game table
+{
+    height: 100%;
+    width: 100%;
+}
+#game table tr td button
+{
+    height: 100%;
+    width: 100%;
+}
