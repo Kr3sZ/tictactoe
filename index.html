@@ -16,7 +16,26 @@
     <div id="game">
         <table>
         </table>
+    <div id="menu">
+        <h1>TIC-TAC-TOE</h1>
+        <h3 id="player">PLAYER: </h3>
+        <div>
+            <form onsubmit="return false">
+                <label for="gameSize">GameSize:</label>
+                <input onchange="RefreshWinAmount();" type="number" name="gameSize" id="gameSize" value="3" min="3" max="20" required><br>
 
+                <label for="playerOneColor">Player 1:</label>
+                <input type="color" name="playerOneColor" id="playerOneColor" value="#FF0000"><br>
+
+                <label for="playerOneColor">Player 2:</label>
+                <input type="color" name="playerTwoColor" id="playerTwoColor" value="#0000FF"><br>
+
+                <label for="winAmount">Win amount:</label>
+                <input type="number" name="winAmount" id="winAmount" value="3" min="3" max="20" required><br>
+
+                <button onclick="StartGame();">START</button>
+            </form>
+        </div>
     </div>
 
     <script src="/res/js/viewport.js"></script>
