@@ -1,21 +1,46 @@
 html, body
 {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
     overflow: hidden;
 }
 
 #game
 {
-    background-color: aqua;
-    margin: auto;
+    float: left;
+
+    background-color: black;
+    color: white;
+
+    font-family: 'VT323';
+    font-size: 5vh;
+    text-align: center;
 }
 
-#game table
+#gametable
 {
     height: 100%;
     width: 100%;
 }
-#game table tr td button
+
+#gametable tr td div
 {
-    height: 100%;
-    width: 100%;
+    height: 95%;
+    width: 95%;
+    margin: auto;
+    background-color: white;
+}
+
+#menu
+{
+    float: left;
+
+    background-color: white;
+    color: black;
+
+    font-family: 'VT323';
+    font-size: 5vh;
+    text-align: center;
 }
