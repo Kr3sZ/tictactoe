@@ -1,6 +1,9 @@
-let isPlaying = false;
-let player = 0;
-let playerColors = ["#FF0000" , "#0000FF"];
+let ISPLAYING = false;
+let PLAYER = 0;
+let PLAYERCOLORS = ["#FF0000" , "#0000FF"];
+let GAMESIZE = 3;
+let WINAMOUNT = 3;
+
 
 let playerLabel = document.getElementById("player");
 
@@ -9,52 +12,79 @@ let playerOneColor = document.getElementById("playerOneColor");
 let playerTwoColor = document.getElementById("playerTwoColor");
 let winAmount = document.getElementById("winAmount");
 
+
+
 function StartGame()
 {
-    if (isPlaying && !confirm("Do you want to start a new game?"))
+    if (ISPLAYING && !confirm("Do you want to start a new game?"))
         return;
 
-    let size = gameSize.value;
-    playerColors[0] = playerOneColor.value;
-    playerColors[1] = playerTwoColor.value;
+    GAMESIZE = gameSize.value;
+    WINAMOUNT = winAmount.value;
+    PLAYERCOLORS[0] = playerOneColor.value;
+    PLAYERCOLORS[1] = playerTwoColor.value;
 
 
-    GenerateGameGrid(size)
+    GenerateGameGrid(GAMESIZE);
     ChooseStarter();
-    isPlaying = true;
+    ISPLAYING = true;
 }
 
 function GameButton(element)
 {
-    let x = element.getAttribute("x");
-    let y = element.getAttribute("y");
+    let row = element.getAttribute("ROW");
+    let column = element.getAttribute("COLUMN");
     let state = element.getAttribute("state");
 
-    console.log(`${x}:${y} | ${state}`);
+    // console.log(`${row}:${column} | ${state}`);
 
     if (state!="0") return;
     
-    element.setAttribute("state",player); // OCCUPING TO CURRENT PLAYER
-    element.style.backgroundColor = playerColors[player-1]; // VISUALISING IT
+    element.setAttribute("state",PLAYER); // OCCUPING TO CURRENT PLAYER
+    element.style.backgroundColor = PLAYERCOLORS[PLAYER-1]; // VISUALISING IT
+
+    CheckWin(row,column);
 
     RefreshPlayerState();
 }
 
 function ChooseStarter()
 {
-    player = Math.floor(Math.random() * 2) + 1;
+    PLAYER = Math.floor(Math.random() * 2) + 1;
     RefreshPlayerState();
 }
 
 function RefreshPlayerState()
 {
-    player = player == 1 ? 2 : 1;
-    playerLabel.innerText = `PLAYER: ${player}`;
-    playerLabel.style.color = playerColors[player-1];
+    PLAYER = PLAYER == 1 ? 2 : 1;
+    playerLabel.innerText = `PLAYER: ${PLAYER}`;
+    playerLabel.style.color = PLAYERCOLORS[PLAYER-1];
 }
 
 function RefreshWinAmount()
 {
-    winAmount.min = gameSize.value;
-    winAmount.value = gameSize.value;
+    winAmount.min = 3;
+    winAmount.value = 3;
+}
+
+function CheckWin(row, column)
+{
+    let current = GRID[row][column];
+
+    let left = column;
+    //let right = GAMESIZE - (column + 1);
+    let top = row;
+    //let bottom = GAMESIZE - (row + 1);
+
+    let leftStart = 0;
+    let topStart = 0;
+
+    if (left >= WINAMOUNT-1)
+    {
+        leftStart = WINAMOUNT-1;
+    }
+    if (top >= WINAMOUNT-1)
+    {
+        topStart = winAmount -1;
+    }
 }
