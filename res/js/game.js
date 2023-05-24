@@ -29,7 +29,7 @@ function StartGame()
 
 function GameButton(element)
 {
-    if (!ISPLAYING) return;
+    if (!ISPLAYING) return; 
     
     let row = element.getAttribute("ROW");
     let column = element.getAttribute("COLUMN");
