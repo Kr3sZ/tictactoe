@@ -1,6 +1,8 @@
 const MAXIMUM_SIZE = 20;
 const MINIMUM_SIZE = 3;
 
+let GRID = [];
+
 function GenerateGameGrid(size)
 {
     if (size > MAXIMUM_SIZE || size < MINIMUM_SIZE)
@@ -13,9 +15,11 @@ function GenerateGameGrid(size)
         GAMETABLE.id = "gametable"
         GAME.appendChild(GAMETABLE);
 
-        for (Y=0; Y<size; Y++)
+        for (ROW=0; ROW<size; ROW++)
         {
             const GAMEROW = document.createElement("tr");
+
+            let GRIDROW = [];
 
             // CALCULATING RESPONSIVE SIZES
             GAMEROW.style.height = `${100/size}%`;
@@ -23,7 +27,7 @@ function GenerateGameGrid(size)
 
             GAMETABLE.appendChild(GAMEROW);
 
-            for (X=0; X<size; X++)
+            for (COLUMN=0; COLUMN<size; COLUMN++)
             {
                 const GAMECOLUMN = document.createElement("td");
 
@@ -37,10 +41,14 @@ function GenerateGameGrid(size)
                 GAMECOLUMN.appendChild(GAMEBUTTON);
 
                 GAMEBUTTON.setAttribute("onclick", "GameButton(this);");
-                GAMEBUTTON.setAttribute("x", X);
-                GAMEBUTTON.setAttribute("y", Y);
+                GAMEBUTTON.setAttribute("ROW", ROW);
+                GAMEBUTTON.setAttribute("COLUMN", COLUMN);
                 GAMEBUTTON.setAttribute("state", "0")
+
+                GRIDROW.push(GAMEBUTTON);
             }
+
+            GRID.push(GRIDROW);
         }
     }
 }
