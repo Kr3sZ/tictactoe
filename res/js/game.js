@@ -4,15 +4,12 @@ let PLAYERCOLORS = ["#FF0000" , "#0000FF"];
 let GAMESIZE = 3;
 let WINAMOUNT = 3;
 
-
 let playerLabel = document.getElementById("player");
 
 let gameSize = document.getElementById("gameSize");
 let playerOneColor = document.getElementById("playerOneColor");
 let playerTwoColor = document.getElementById("playerTwoColor");
 let winAmount = document.getElementById("winAmount");
-
-
 
 function StartGame()
 {
@@ -24,28 +21,31 @@ function StartGame()
     PLAYERCOLORS[0] = playerOneColor.value;
     PLAYERCOLORS[1] = playerTwoColor.value;
 
-
     GenerateGameGrid(GAMESIZE);
     ChooseStarter();
     ISPLAYING = true;
 }
 
+
 function GameButton(element)
 {
+    if (!ISPLAYING) return;
+    
     let row = element.getAttribute("ROW");
     let column = element.getAttribute("COLUMN");
     let state = element.getAttribute("state");
-
-    // console.log(`${row}:${column} | ${state}`);
-
-    if (state!="0") return;
     
+    if (state != "0") return;
+
     element.setAttribute("state",PLAYER); // OCCUPING TO CURRENT PLAYER
     element.style.backgroundColor = PLAYERCOLORS[PLAYER-1]; // VISUALISING IT
 
-    CheckWin(row,column);
-
-    RefreshPlayerState();
+    if (CheckWin(row,column))
+    {
+        ISPLAYING = false;
+        playerLabel.innerText = `PLAYER ${PLAYER} WON`;
+    }
+    else RefreshPlayerState();
 }
 
 function ChooseStarter()
@@ -69,22 +69,17 @@ function RefreshWinAmount()
 
 function CheckWin(row, column)
 {
-    let current = GRID[row][column];
-
-    let left = column;
-    //let right = GAMESIZE - (column + 1);
-    let top = row;
-    //let bottom = GAMESIZE - (row + 1);
-
-    let leftStart = 0;
-    let topStart = 0;
-
-    if (left >= WINAMOUNT-1)
-    {
-        leftStart = WINAMOUNT-1;
-    }
-    if (top >= WINAMOUNT-1)
-    {
-        topStart = winAmount -1;
-    }
+    let rStart = 0;
+    let cStart = 0;
+    while (GRID[rStart][column].getAttribute("state") != PLAYER && rStart < GAMESIZE) rStart++;
+    console.log(GRID[rStart][column]);
+    while (GRID[row][cStart].getAttribute("state") != PLAYER && cStart < GAMESIZE) cStart++;
+    console.log(GRID[row][cStart]);
+    
+    let r = 0;
+    let c = 0;
+    while (r < GAMESIZE-rStart && GRID[r+rStart][column].getAttribute("state") == PLAYER) r++;
+    while (c < GAMESIZE-cStart && GRID[row][c+cStart].getAttribute("state") == PLAYER) c++;
+    
+    return r >= WINAMOUNT || c>= WINAMOUNT;
 }

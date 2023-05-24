@@ -55,5 +55,6 @@ function GenerateGameGrid(size)
 
 function ClearGame()
 {
+    GRID = [];
     GAME.innerHTML = ""; // CLEARING ALREADY DEFINED PLACES
 }    
