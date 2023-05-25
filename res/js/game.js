@@ -63,8 +63,8 @@ function RefreshPlayerState()
 
 function RefreshWinAmount()
 {
-    winAmount.min = 3;
-    winAmount.value = 3;
+    winAmount.min = WINAMOUNT;
+    winAmount.value = WINAMOUNT;
 }
 
 function CheckWin(row, column)
