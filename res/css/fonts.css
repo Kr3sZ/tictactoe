@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'VT323';
-    src: url('/res/fonts/VT323-Regular.ttf');
+    src: url('res/fonts/VT323-Regular.ttf');
     font-weight: normal;
     font-style: normal;
 }
